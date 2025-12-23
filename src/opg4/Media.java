@@ -20,8 +20,14 @@ public abstract class Media {
         return actors;
     }
 
+    // TILFØJET: getInfo() metode som krævet i klassediagrammet
+    // Denne metode returnerer grundlæggende information om mediet
+    public String getInfo() {
+        return title + " with actors: " + String.join(", ", actors);
+    }
+
     @Override
     public String toString() {
-        return title + " with actors: " + actors;
+        return getInfo(); // Bruger getInfo() for konsistens
     }
 }

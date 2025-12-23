@@ -61,10 +61,10 @@ public class Streaming {
             System.out.println(media);
             if (media instanceof Series) {
                 Series series = (Series) media;
-                for (Season season : series.getSeasons()) {
-                    System.out.println("  " + season);
-                    for (Episode episode : season.getEpisodes()) {
-                        System.out.println("    " + episode);
+                for (Season ss : series.getSeasons()) {
+                    System.out.println("  " + ss);
+                    for (Episode ep  : ss.getEpisodes()) {
+                        System.out.println("    " + ep);
                     }
                 }
             }
