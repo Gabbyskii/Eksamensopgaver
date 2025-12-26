@@ -2,14 +2,10 @@ package opg2;
 
 public class Main {
     public static void main(String[] args) {
-        //TODO: UDVIDELSE: Find dyreste/billigste time.
-        // Beregn besparelse hvis alle var elektriske.
-        // Tilføj standby- omkostning (2kr/time under 50°C).
-
         // Instantier SaunaVillage
         SaunaVillage village = new SaunaVillage();
 
-        // Load CSV fil (sørg for at filen eksisterer i dit projekt)
+        // Load CSV fil
         village.loadFromCSV("src/opg2/sauna.txt");
 
         // Udskriv rapport
@@ -34,9 +30,20 @@ public class Main {
         // Find billigste sauna
         Sauna cheapest = village.getCheapest();
         if (cheapest != null) {
-            System.out.printf("Billigste sauna: %s (%.2f kr)%n",
+            System.out.printf("Billigste sauna: %s (%.2f kr)%n%n",
                     cheapest.getName(),
                     cheapest.calculateDailyCost());
         }
+
+        // ===== UDVIDELSER =====
+
+        // UDVIDELSE 1: Find dyreste/billigste time
+        village.findMostAndLeastExpensiveHour();
+
+        // UDVIDELSE 2: Beregn besparelse hvis alle var elektriske
+        village.calculateElectricSavings();
+
+        // UDVIDELSE 3: Standby omkostning (2kr/time under 50°C)
+        village.calculateStandbyCosts();
     }
 }

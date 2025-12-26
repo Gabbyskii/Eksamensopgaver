@@ -4,13 +4,6 @@ import java.time.LocalDate;
 
 public class Main {
     public static void main(String[] args) {
-        //TODO: Tænk over:
-        // • Hvordan holder du styr på antal bookede billetter for hvert event? - shows available seats.
-        // • Hvordan tjekker du om et event er sold out? - return når bookedSeats == maxCapacity;
-        // • Hvordan validerer du at der er ledige pladser før en booking?
-        // • Hvordan håndterer du fejlsituationer? (Hint: exceptions eller returværdier?) - returnværdier (if + return)
-
-
         EventManager manager = new EventManager();
 
         Event concert = new Concert(
@@ -33,7 +26,6 @@ public class Main {
                 true
         );
 
-
         manager.addEvent(concert);
         manager.addEvent(workshop);
 
@@ -43,7 +35,6 @@ public class Main {
 
 
         manager.printOverview();
-
 
         Event mostPopular = manager.findMostPopularEvent();
         System.out.println("\nMost popular event is the " + mostPopular.getDetails().split("\n")[0]);
