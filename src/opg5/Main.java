@@ -5,14 +5,11 @@ import java.util.Map;
 
 public class Main {
     public static void main(String[] args) {
-        //TODO: Tænk over hvad der skal ske, hvis kompetencen allerede findes, ?
-        // når man prøver at tilføje den igen,
-        // samt hvordan du sikrer, at kompetenceniveauer altid ligger mellem 1 og 10. - laver if-statements i setLevel metode.
 
-        // Create a team
-        Team team = new Team("Backend Team");
+        // Opretter et team
+        Team t = new Team("Backend Team");
 
-        // Create developers with various skills
+        // Opretter developers med forskellige skills
         Developer cal = new Developer("Cal");
         cal.addSkill("Java", 7);
         cal.addSkill("SQL", 5);
@@ -33,52 +30,55 @@ public class Main {
         diana.addSkill("SQL", 10);
         diana.addSkill("Git", 5);
 
-        // Add developers to team
-        team.addDeveloper(cal);
-        team.addDeveloper(lester);
-        team.addDeveloper(jason);
-        team.addDeveloper(diana);
+        // Tilføjer developers til teamet
+        t.addDev(cal);
+        t.addDev(lester);
+        t.addDev(jason);
+        t.addDev(diana);
 
-        // Print team overview
-        team.printTeamOverview();
+        // Printer team oversigt med alle developers
+        t.printTeamOverview();
 
-        // Update a skill
+        // Opdaterer skill-niveauer for eksisterende skills
         System.out.println("=== Updating Skills ===");
         diana.updateSkillLevel("Java", 8);
         lester.updateSkillLevel("SQL", 10);
 
-        // Find best developer for specific skill
+        // Finder bedste developer for specifikke skills
         System.out.println("\n=== Finding Best Developers ===");
-        team.findBestDeveloperForSkill("Java");
-        team.findBestDeveloperForSkill("SQL");
-        team.findBestDeveloperForSkill("Python"); // No one has this
+        t.findBestDevForSkill("Java");
+        t.findBestDevForSkill("SQL");
+        t.findBestDevForSkill("Python"); // Ingen har denne skill
 
-        // Find developers meeting specific requirements
+        // Finder developers der opfylder specifikke krav
         System.out.println("\n=== Finding Developers Meeting Requirements ===");
-        Map<String, Integer> requirements1 = new HashMap<>();
-        requirements1.put("Java", 3);
-        requirements1.put("SQL", 2);
+
+        // Krav 1: Java >= 3 og SQL >= 2
+        Map<String, Integer> requires1 = new HashMap<>();
+        requires1.put("Java", 3);
+        requires1.put("SQL", 2);
         System.out.println("Requirements: Java >= 3, SQL >= 2");
-        team.findDevelopersMeetingRequirements(requirements1);
+        t.findDevsMeetingRequirements(requires1);
 
-        Map<String, Integer> requirements2 = new HashMap<>();
-        requirements2.put("Java", 7);
-        requirements2.put("Git", 6);
+        // Krav 2: Java >= 7 og Git >= 6
+        Map<String, Integer> requires2 = new HashMap<>();
+        requires2.put("Java", 7);
+        requires2.put("Git", 6);
         System.out.println("\nRequirements: Java >= 7, Git >= 6");
-        team.findDevelopersMeetingRequirements(requirements2);
+        t.findDevsMeetingRequirements(requires2);
 
-        // Remove a developer
+        // Fjerner en developer fra teamet
         System.out.println("\n=== Removing Developer ===");
-        team.removeDeveloper("Diana");
+        t.removeDeveloper("Diana");
 
-        // Print updated team overview
-        team.printTeamOverview();
+        // Printer opdateret team oversigt
+        t.printTeamOverview();
 
-        // Try to find removed developer
+        // Forsøger at finde fjernet developer (for at demonstrere at den er væk)
         System.out.println("=== Finding Removed Developer ===");
-        Developer found = team.findDeveloper("Diana");
+        Developer found = t.findDeveloper("Diana");
         if (found == null) {
-            System.out.println("Jason is no longer in the team");
+            System.out.println("Diana is no longer in the team");
         }
     }
 }
