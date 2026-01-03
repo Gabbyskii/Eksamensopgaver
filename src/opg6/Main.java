@@ -14,7 +14,6 @@ public class Main {
         center.addPet(t2);
 
         // Udfør aktiviteter på kæledyrene
-        // OBS: "Luna" findes ikke, så denne aktivitet gør ingenting
         center.performActivityOnPet("Lola", ActivityType.SLEEP, 5);
 
         // Lad Milo lege 3 gange

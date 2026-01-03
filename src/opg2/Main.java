@@ -2,10 +2,6 @@ package opg2;
 
 public class Main {
     public static void main(String[] args) {
-        //TODO: UDVIDELSE: Find dyreste/billigste time.
-        // Beregn besparelse hvis alle var elektriske.
-        // Tilføj standby- omkostning (2kr/time under 50°C).
-
         // Instantier SaunaVillage
         SaunaVillage village = new SaunaVillage();
 
