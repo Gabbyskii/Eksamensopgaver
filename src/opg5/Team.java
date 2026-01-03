@@ -9,6 +9,7 @@ public class Team {
     private String name;
     private List<Developer> developers = new ArrayList<>();
 
+    // Konstruktør der opretter team med navn
     public Team(String name) {
         this.name = name;
     }
@@ -25,35 +26,38 @@ public class Team {
         return developers;
     }
 
-    /**
-     * Add a developer to the team
-     * @param developer the developer to add
-     */
-    public void addDeveloper(Developer developer) {
+    // Tilføjer en udvikler til teamet med validering
+    public void addDev(Developer developer) {
+        // Tjekker om developer er null
         if (developer == null) {
-            System.out.println("Cannot add null developer");
+            System.out.println("Cannot add *** developer");
             return;
         }
+
+        // Tjekker om developer allerede er i teamet
         if (developers.contains(developer)) {
             System.out.println(developer.getName() + " is already in the team");
             return;
         }
+
+        // Tilføjer developer til teamet
         developers.add(developer);
         System.out.println(developer.getName() + " added to team " + name);
     }
 
-    /**
-     * Remove a developer from the team by name
-     * @param developerName name of the developer to remove
-     */
+    // Fjerner en udvikler fra teamet baseret på navn
     public void removeDeveloper(String developerName) {
         Developer toRemove = null;
+
+        // Finder developer med matchende navn (case-insensitive)
         for (Developer dev : developers) {
             if (dev.getName().equalsIgnoreCase(developerName)) {
                 toRemove = dev;
                 break;
             }
         }
+
+        // Fjerner developer hvis fundet
         if (toRemove != null) {
             developers.remove(toRemove);
             System.out.println(developerName + " removed from team " + name);
@@ -62,11 +66,7 @@ public class Team {
         }
     }
 
-    /**
-     * Find a developer by name
-     * @param developerName name of the developer to find
-     * @return the developer, or null if not found
-     */
+    // Finder og returnerer en specifik developer (null hvis ikke fundet)
     public Developer findDeveloper(String developerName) {
         for (Developer dev : developers) {
             if (dev.getName().equalsIgnoreCase(developerName)) {
@@ -76,16 +76,16 @@ public class Team {
         return null;
     }
 
-    /**
-     * Print an overview of the team and all developers with their skills
-     */
+    // Printer oversigt over teamet og alle udviklere
     public void printTeamOverview() {
         System.out.println("\n=== Team: " + name + " ===");
         System.out.println("Number of developers: " + developers.size());
         System.out.println("\nDevelopers:");
+
         if (developers.isEmpty()) {
             System.out.println("  No developers in team");
         } else {
+            // Printer hver developer med deres skills
             for (Developer dev : developers) {
                 System.out.println("  " + dev);
             }
@@ -93,15 +93,12 @@ public class Team {
         System.out.println();
     }
 
-    /**
-     * Find the developer with the highest level in a specific skill
-     * @param skillName the skill to search for
-     * @return the best developer for that skill, or null if no one has it
-     */
-    public Developer findBestDeveloperForSkill(String skillName) {
+    // Finder den bedste developer til en specifik skill
+    public Developer findBestDevForSkill(String skillName) {
         Developer bestDev = null;
         int highestLevel = 0;
 
+        // Gennemgår alle developers og finder højeste niveau
         for (Developer dev : developers) {
             int level = dev.getSkillLevel(skillName);
             if (level > highestLevel) {
@@ -110,6 +107,7 @@ public class Team {
             }
         }
 
+        // Printer resultat
         if (bestDev != null) {
             System.out.println("Best developer for " + skillName + ": " +
                     bestDev.getName() + " (level " + highestLevel + ")");
@@ -120,32 +118,32 @@ public class Team {
         return bestDev;
     }
 
-    /**
-     * Find all developers who meet minimum requirements for specified skills
-     * @param requirements Map of skill names to minimum required levels
-     * @return List of developers who meet all requirements
-     */
-    public List<Developer> findDevelopersMeetingRequirements(Map<String, Integer> requirements) {
+    // Finder alle developers der opfylder mindstekrav for skills
+    public List<Developer> findDevsMeetingRequirements(Map<String, Integer> requirements) {
         List<Developer> qualifiedDevs = new ArrayList<>();
 
+        // Tjekker hver developer mod kravene
         for (Developer dev : developers) {
             boolean meetsAllRequirements = true;
 
+            // Tjekker om developer opfylder alle skill-krav
             for (Map.Entry<String, Integer> requirement : requirements.entrySet()) {
                 String skillName = requirement.getKey();
                 int minLevel = requirement.getValue();
 
                 if (!dev.hasSkillAtLevel(skillName, minLevel)) {
                     meetsAllRequirements = false;
-                    break;
+                    break;  // Stop hvis et krav ikke opfyldes
                 }
             }
 
+            // Tilføj developer til listen hvis alle krav opfyldes
             if (meetsAllRequirements) {
                 qualifiedDevs.add(dev);
             }
         }
 
+        // Printer resultat
         System.out.println("\nDevelopers meeting requirements:");
         if (qualifiedDevs.isEmpty()) {
             System.out.println("  No developers meet all requirements");
